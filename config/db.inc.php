@@ -5,8 +5,7 @@
  */
  
 // parses the settings file
-$settings = parse_ini_file('settings.ini', true);
-
+$settings = parse_ini_file(__DIR__ . '/settings.ini', true);
 // starts the connection to the database
 $dbh = new PDO(
   sprintf(
