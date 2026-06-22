@@ -1,42 +1,39 @@
 <?php
 
 class TaskModel {
-    private ?PDO $db = null;
+    private $jsonPath;
 
     public function __construct() {
-        global $dbh;
-        
-        // Si la conexión global no está iniciada, forzamos la inclusión de db.inc.php
-        if (!isset($dbh)) {
-            // __DIR__ es 'app/models'. Subimos dos niveles para llegar a la raíz y entrar a config/
-            require_once __DIR__ . '/../../config/db.inc.php';
-        }
-        
-        $this->db = $dbh;
+        $this->jsonPath = __DIR__ . '/../../config/tasks.json';
     }
-    
+
+    private function readJson() {
+        if (!file_exists($this->jsonPath)) {
+            return [];
+        }
+        $content = file_get_contents($this->jsonPath);
+        return json_decode($content, true) ?? [];
+    }
+
     public function getTasks($statusFilter = null, $searchQuery = null) {
-        $sql = "SELECT * FROM task WHERE 1=1";
-        $params = [];
+        $tasks = $this->readJson();
 
-        // Filtro por Estado (Punto 2)
         if (!empty($statusFilter)) {
-            $sql .= " AND status = :status";
-            $params[':status'] = $statusFilter;
+            $tasks = array_filter($tasks, function($task) use ($statusFilter) {
+                return $task['status'] === $statusFilter;
+            });
         }
 
-        // Filtro por Palabra Clave / Título (Punto 2)
         if (!empty($searchQuery)) {
-            $sql .= " AND title LIKE :search";
-            $params[':search'] = '%' . $searchQuery . '%';
+            $tasks = array_filter($tasks, function($task) use ($searchQuery) {
+                return stripos($task['title'], $searchQuery) !== false;
+            });
         }
 
-        // Orden descendente (Punto 2)
-        $sql .= " ORDER BY created_at DESC";
+        usort($tasks, function($a, $b) {
+            return $b['id'] - $a['id'];
+        });
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($params);
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return array_values($tasks);
     }
 }

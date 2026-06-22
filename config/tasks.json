@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "title": "Configurar estructura base",
+        "description": "Dejar listo el framework para trabajar la persistencia en formato JSON.",
+        "status": "PENDING",
+        "user_name": "Wilo",
+        "created_at": "2026-06-22 10:00:00",
+        "finished_at": null
+    },
+    {
+        "id": 2,
+        "title": "Diseñar columnas del tablero",
+        "description": "Estructurar las columnas Pendientes, En ejecución y Terminadas.",
+        "status": "IN_PROGRESS",
+        "user_name": "Carlos",
+        "created_at": "2026-06-22 11:30:00",
+        "finished_at": null
+    }
+]
