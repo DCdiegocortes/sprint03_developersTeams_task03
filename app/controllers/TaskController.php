@@ -65,4 +65,67 @@ class TaskController extends ApplicationController
             $this->view->message = '✅ Tarea creada correctamente.';
         }
     }
+    public function deleteAction()
+    {
+        $this->view->message = null;
+        $this->view->error = null;
+        $this->view->task = null;
+
+        $id = $_POST['id'] ?? $_GET['id'] ?? null;
+
+        if ($id === null || !is_numeric($id)) {
+            $this->view->error = 'ID de tarea inválido.';
+            return;
+        }
+
+        $id = (int) $id;
+        $jsonPath = ROOT_PATH . '/tasks.json';
+
+        if (!file_exists($jsonPath)) {
+            $this->view->error = 'No existe el archivo de tareas.';
+            return;
+        }
+
+        $jsonContent = file_get_contents($jsonPath);
+        $tasks = json_decode($jsonContent, true);
+
+        if (!is_array($tasks)) {
+            $this->view->error = 'El archivo de tareas no tiene un formato válido.';
+            return;
+        }
+
+        $taskIndex = null;
+
+        foreach ($tasks as $index => $task) {
+            if (isset($task['id']) && (int) $task['id'] === $id) {
+                $taskIndex = $index;
+                break;
+            }
+        }
+
+        if ($taskIndex === null) {
+            $this->view->error = 'No se encontró la tarea indicada.';
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $deletedTaskTitle = $tasks[$taskIndex]['title'] ?? '';
+
+            unset($tasks[$taskIndex]);
+
+            file_put_contents(
+                $jsonPath,
+                json_encode(array_values($tasks), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            );
+
+            $this->view->message = $deletedTaskTitle !== ''
+                ? 'La tarea "' . $deletedTaskTitle . '" fue eliminada correctamente.'
+                : 'La tarea fue eliminada correctamente.';
+
+            $this->view->task = null;
+            return;
+        }
+
+        $this->view->task = $tasks[$taskIndex];
+    }
 }
