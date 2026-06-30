@@ -45,7 +45,9 @@ class Task extends Model
             });
         }
 
-        if ($searchQuery !== null && $searchQuery !== '') {
+        if ($searchQuery !== null && trim($searchQuery) !== '') {
+            $searchQuery = trim($searchQuery);
+
             $tasks = array_filter($tasks, function ($task) use ($searchQuery) {
                 return isset($task['title']) && stripos($task['title'], $searchQuery) !== false;
             });

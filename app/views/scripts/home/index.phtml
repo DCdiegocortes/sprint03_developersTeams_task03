@@ -1,0 +1,209 @@
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: #71D7E8;
+        color: #18242B;
+    }
+
+    .home-page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 40px 20px;
+        box-sizing: border-box;
+    }
+
+    .home-card {
+        width: min(1180px, 94vw);
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 28px;
+        padding: 40px;
+        box-shadow: 0 24px 60px rgba(0, 70, 90, 0.22);
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        animation: cardEnter 0.7s ease-out both;
+    }
+
+    .home-copy {
+        flex: 1;
+        min-width: 260px;
+    }
+
+    .home-title {
+        margin: 0 0 12px;
+        font-size: 48px;
+        line-height: 1;
+        color: #F76BA6;
+        letter-spacing: -1px;
+        font-weight: 900;
+        animation: bubbleTitle 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .home-subtitle {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.5;
+        color: rgba(24, 36, 43, 0.75);
+        font-weight: 700;
+        animation: fadeUp 0.7s ease-out 0.35s both;
+    }
+
+    .home-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 14px;
+        flex-wrap: wrap;
+        animation: fadeUp 0.7s ease-out 0.7s both;
+    }
+
+    .home-btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 16px 24px;
+        font-size: 16px;
+        font-weight: 900;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        white-space: nowrap;
+        box-sizing: border-box;
+    }
+
+    .home-btn-primary {
+        color: #FFFFFF;
+        background: #F76BA6;
+        box-shadow: 0 8px 0 #D94D87;
+    }
+
+    .home-btn-secondary {
+        color: #FFFFFF;
+        background: #18242B;
+        box-shadow: 0 8px 0 #0B1115;
+    }
+
+    .home-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .home-btn-primary:hover {
+        box-shadow: 0 10px 0 #D94D87;
+    }
+
+    .home-btn-secondary:hover {
+        box-shadow: 0 10px 0 #0B1115;
+    }
+
+    .home-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    @keyframes cardEnter {
+        from {
+            opacity: 0;
+            transform: translateY(18px) scale(0.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @keyframes bubbleTitle {
+        0% {
+            opacity: 0;
+            transform: scale(0.72) translateY(18px);
+        }
+
+        65% {
+            opacity: 1;
+            transform: scale(1.08) translateY(0);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(14px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 820px) {
+        .home-card {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .home-title {
+            font-size: 38px;
+        }
+
+        .home-actions {
+            width: 100%;
+            justify-content: flex-start;
+        }
+    }
+
+    @media (max-width: 560px) {
+        .home-card {
+            padding: 28px;
+        }
+
+        .home-title {
+            font-size: 32px;
+        }
+
+        .home-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .home-btn {
+            width: 100%;
+        }
+    }
+</style>
+
+<main class="home-page">
+    <section class="home-card">
+        <div class="home-copy">
+            <h1 class="home-title">¿Qué quieres hacer hoy?</h1>
+
+            <p class="home-subtitle">
+                Organiza tus tareas, revisa su estado y mantén el control del trabajo pendiente.
+            </p>
+        </div>
+
+        <div class="home-actions">
+            <a href="/task/create" class="home-btn home-btn-primary">
+                + Nueva Tarea
+            </a>
+
+            <a href="/test" class="home-btn home-btn-secondary">
+                🔍 Listar Tareas
+            </a>
+        </div>
+    </section>
+</main>
