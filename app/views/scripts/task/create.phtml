@@ -1,0 +1,206 @@
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: #71D7E8;
+        color: #18242B;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 620px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 28px;
+        padding: 40px;
+        box-shadow: 0 24px 60px rgba(0, 70, 90, 0.22);
+    }
+
+    h1 {
+        margin: 0 0 12px;
+        font-size: 48px;
+        line-height: 1;
+        color: #F76BA6;
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        margin: 0 0 28px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: rgba(24, 36, 43, 0.75);
+    }
+
+    .message {
+        margin-bottom: 20px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        font-weight: bold;
+    }
+
+    .message.error {
+        background: rgba(233, 54, 69, 0.12);
+        color: #9D1022;
+        border: 1px solid rgba(233, 54, 69, 0.35);
+    }
+
+    .message.success {
+        background: rgba(12, 182, 132, 0.12);
+        color: #087E5B;
+        border: 1px solid rgba(12, 182, 132, 0.35);
+    }
+
+    .task-form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    label {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #F76BA6;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        border: 0;
+        border-radius: 18px;
+        padding: 16px 18px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.9);
+        color: #18242B;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        box-shadow: 0 0 0 3px rgba(247, 107, 166, 0.28);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .submit-btn {
+        margin-top: 8px;
+        border: 0;
+        border-radius: 999px;
+        padding: 16px 24px;
+        font-size: 18px;
+        font-weight: 900;
+        color: #FFFFFF;
+        background: #F76BA6;
+        cursor: pointer;
+        box-shadow: 0 8px 0 #D94D87;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 0 #D94D87;
+    }
+
+    .submit-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 4px 0 #D94D87;
+    }
+
+    @media (max-width: 640px) {
+        .card {
+            padding: 28px;
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+    }
+</style>
+
+<main class="page">
+    <section class="card">
+        <h1>Crear tarea</h1>
+
+        <p class="subtitle">
+            Completá los datos para crear una nueva tarea y guardarla en el archivo JSON.
+        </p>
+
+        <?php if (!empty($this->error)): ?>
+            <p class="message error"><?= htmlspecialchars($this->error) ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($this->message)): ?>
+            <p class="message success"><?= htmlspecialchars($this->message) ?></p>
+        <?php endif; ?>
+
+        <form class="task-form" action="/task/create" method="POST">
+            <div class="form-group">
+                <label for="user_name">Usuario</label>
+                <input
+                        type="text"
+                        id="user_name"
+                        name="user_name"
+                        placeholder="Ej: Diego"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Ej: Sacar a pasear al perro"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Ej: Paseo de 30 minutos"
+                        required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Estado</label>
+                <select id="status" name="status">
+                    <option value="PENDING">PENDING</option>
+                    <option value="IN_PROGRESS">IN_PROGRESS</option>
+                    <option value="FINISHED">FINISHED</option>
+                </select>
+            </div>
+
+            <button class="submit-btn" type="submit">
+                Guardar tarea
+            </button>
+        </form>
+    </section>
+</main>
