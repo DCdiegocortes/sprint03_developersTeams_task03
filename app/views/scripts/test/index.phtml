@@ -1,1 +1,469 @@
-content from the test/index.phtml file :)
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: #71D7E8;
+        color: #18242B;
+    }
+
+    .dashboard-page {
+        width: min(1180px, 94vw);
+        margin: 0 auto;
+        padding: 40px 0;
+        box-sizing: border-box;
+    }
+
+    .dashboard-header {
+        margin-bottom: 28px;
+    }
+
+    .dashboard-header h1 {
+        margin: 0 0 10px;
+        font-size: 48px;
+        line-height: 1;
+        color: #F76BA6;
+        letter-spacing: -1px;
+    }
+
+    .dashboard-header p,
+    .note {
+        margin: 0;
+        color: rgba(24, 36, 43, 0.75);
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    .panel {
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: 0 24px 60px rgba(0, 70, 90, 0.22);
+        margin-bottom: 28px;
+        box-sizing: border-box;
+    }
+
+    .panel h2 {
+        margin: 0 0 10px;
+        font-size: 32px;
+        color: #F76BA6;
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        align-items: center;
+    }
+
+    .input {
+        border: 0;
+        border-radius: 18px;
+        padding: 15px 18px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        font-weight: 700;
+        background: rgba(255, 255, 255, 0.95);
+        color: #18242B;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    .search-input {
+        min-width: 260px;
+        flex: 1;
+    }
+
+    .btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 15px 22px;
+        font-size: 15px;
+        font-weight: 900;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        box-sizing: border-box;
+    }
+
+    .btn-primary {
+        color: #FFFFFF;
+        background: #F76BA6;
+        box-shadow: 0 8px 0 #D94D87;
+    }
+
+    .btn-light {
+        color: #18242B;
+        background: #E5E7EB;
+        box-shadow: 0 8px 0 #B8BDC7;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .tasks-board {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    .task-column {
+        min-height: 620px;
+        background: rgba(255, 255, 255, 0.55);
+        border-radius: 26px;
+        padding: 22px;
+        box-shadow: 0 18px 40px rgba(0, 70, 90, 0.16);
+        box-sizing: border-box;
+    }
+
+    .task-column h2 {
+        margin: 0 0 22px;
+        font-size: 30px;
+        color: #F76BA6;
+        letter-spacing: -0.5px;
+    }
+
+    .task-card {
+        background: rgba(255, 255, 255, 0.94);
+        border-radius: 22px;
+        padding: 22px;
+        margin-bottom: 18px;
+        box-shadow: 0 10px 28px rgba(0, 70, 90, 0.12);
+        box-sizing: border-box;
+    }
+
+    .task-card h3 {
+        margin: 0 0 10px;
+        font-size: 22px;
+        line-height: 1.15;
+        color: #18242B;
+    }
+
+    .task-card p {
+        margin: 0 0 14px;
+        color: rgba(24, 36, 43, 0.78);
+        line-height: 1.45;
+        font-weight: 600;
+    }
+
+    .task-card small {
+        display: block;
+        color: rgba(24, 36, 43, 0.68);
+        font-weight: 800;
+        margin-top: 6px;
+    }
+
+    .status-pill {
+        display: inline-flex;
+        width: fit-content;
+        margin-top: 14px;
+        padding: 9px 13px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 900;
+    }
+
+    .status-pending {
+        background: rgba(255, 193, 7, 0.22);
+        color: #856404;
+    }
+
+    .status-progress {
+        background: rgba(59, 130, 246, 0.18);
+        color: #1D4ED8;
+    }
+
+    .status-finished {
+        background: rgba(34, 197, 94, 0.18);
+        color: #166534;
+    }
+
+    .empty-state {
+        margin: 0;
+        color: rgba(24, 36, 43, 0.58);
+        font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+        .tasks-board {
+            grid-template-columns: 1fr;
+        }
+
+        .task-column {
+            min-height: auto;
+        }
+
+        .dashboard-header h1 {
+            font-size: 38px;
+        }
+
+        .filter-actions {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .input,
+        .btn {
+            width: 100%;
+        }
+
+        .search-input {
+            min-width: 0;
+        }
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .icon-btn,
+        .more-btn {
+            border: 0;
+            border-radius: 999px;
+            padding: 11px 14px;
+            font-size: 14px;
+            font-weight: 900;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .icon-btn {
+            background: #F76BA6;
+            color: #FFFFFF;
+            box-shadow: 0 6px 0 #D94D87;
+        }
+
+        .more-btn {
+            min-width: 46px;
+            background: #E5E7EB;
+            color: #18242B;
+            box-shadow: 0 6px 0 #B8BDC7;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .icon-btn:hover,
+        .more-btn:hover {
+            transform: translateY(-2px);
+        }
+    }
+</style>
+
+<?php
+$tasks = $this->tasks;
+
+if (!is_array($tasks)) {
+    $tasks = [];
+}
+
+$currentStatus = $this->current_status ?? '';
+$currentSearch = $this->current_search ?? '';
+?>
+
+<div class="dashboard-page">
+    <section class="dashboard-header">
+        <h1>¿Qué quieres hacer hoy?</h1>
+        <p>Organiza tus tareas, revisa su estado y mantén el control del trabajo pendiente.</p>
+    </section>
+
+    <section id="task_filter_panel" class="panel filter-panel">
+        <h2>Listar tareas</h2>
+        <p class="note">Elige cómo quieres visualizar las tareas.</p>
+
+        <form method="GET" action="/test" class="filter-actions">
+            <a href="/test" class="btn btn-light">
+                Ver todas
+            </a>
+
+            <select class="input" name="status_filter">
+                <option value="" <?= empty($currentStatus) ? 'selected' : '' ?>>
+                    Ver por estado
+                </option>
+
+                <option value="PENDING" <?= $currentStatus === 'PENDING' ? 'selected' : '' ?>>
+                    Filtrar por pendientes
+                </option>
+
+                <option value="IN_PROGRESS" <?= $currentStatus === 'IN_PROGRESS' ? 'selected' : '' ?>>
+                    Filtrar por en ejecución
+                </option>
+
+                <option value="FINISHED" <?= $currentStatus === 'FINISHED' ? 'selected' : '' ?>>
+                    Filtrar por terminadas
+                </option>
+            </select>
+
+            <input
+                    class="input search-input"
+                    type="text"
+                    name="search"
+                    placeholder="Filtrar por título"
+                    value="<?= htmlspecialchars($currentSearch, ENT_QUOTES, 'UTF-8') ?>"
+            >
+
+            <button class="btn btn-primary" type="submit">
+                Buscar
+            </button>
+        </form>
+    </section>
+
+    <section class="tasks-board">
+        <?php if (empty($currentStatus) || $currentStatus === 'PENDING'): ?>
+            <div class="task-column">
+                <h2>Pendientes</h2>
+
+                <?php $hasPending = false; ?>
+
+                <?php foreach ($tasks as $task): ?>
+                    <?php if (($task['status'] ?? '') === 'PENDING'): ?>
+                        <?php
+                        $hasPending = true;
+                        $taskId = urlencode((string) ($task['id'] ?? ''));
+                        ?>
+
+                        <article class="task-card">
+                            <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
+
+                            <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
+
+                            <small>
+                                Creado por: <?= htmlspecialchars($task['user_name'] ?? 'Anónimo', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <small>
+                                ⏱️ Creada: <?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <span class="status-pill status-pending">
+                                PENDING
+                            </span>
+
+                            <div class="quick-actions">
+                                <a href="/task/play?id=<?= $taskId ?>" class="icon-btn">
+                                    ▶️ Play
+                                </a>
+
+                                <a href="/task/edit?id=<?= $taskId ?>" class="more-btn" title="Editar tarea">
+                                    ⋯
+                                </a>
+                            </div>
+                        </article>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <?php if (!$hasPending): ?>
+                    <p class="empty-state">No hay tareas pendientes.</p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (empty($currentStatus) || $currentStatus === 'IN_PROGRESS'): ?>
+            <div class="task-column">
+                <h2>En ejecución</h2>
+
+                <?php $hasProgress = false; ?>
+
+                <?php foreach ($tasks as $task): ?>
+                    <?php if (($task['status'] ?? '') === 'IN_PROGRESS'): ?>
+                        <?php
+                        $hasProgress = true;
+                        $taskId = urlencode((string) ($task['id'] ?? ''));
+                        ?>
+
+                        <article class="task-card">
+                            <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
+
+                            <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
+
+                            <small>
+                                Creado por: <?= htmlspecialchars($task['user_name'] ?? 'Anónimo', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <small>
+                                ⏱️ Inicio: <?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <span class="status-pill status-progress">
+                                IN_PROGRESS
+                            </span>
+
+                            <div class="quick-actions">
+                                <a href="/task/finish?id=<?= $taskId ?>" class="icon-btn">
+                                    ✅ Terminar
+                                </a>
+
+                                <a href="/task/edit?id=<?= $taskId ?>" class="more-btn" title="Editar tarea">
+                                    ⋯
+                                </a>
+                            </div>
+                        </article>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <?php if (!$hasProgress): ?>
+                    <p class="empty-state">No hay tareas en ejecución.</p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (empty($currentStatus) || $currentStatus === 'FINISHED'): ?>
+            <div class="task-column">
+                <h2>Terminadas</h2>
+
+                <?php $hasFinished = false; ?>
+
+                <?php foreach ($tasks as $task): ?>
+                    <?php if (($task['status'] ?? '') === 'FINISHED'): ?>
+                        <?php
+                        $hasFinished = true;
+                        $taskId = urlencode((string) ($task['id'] ?? ''));
+                        ?>
+
+                        <article class="task-card">
+                            <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
+
+                            <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
+
+                            <small>
+                                Creado por: <?= htmlspecialchars($task['user_name'] ?? 'Anónimo', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <small>
+                                ⏱️ Inicio: <?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <small>
+                                🏁 Fin: <?= htmlspecialchars($task['finished_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
+                            </small>
+
+                            <span class="status-pill status-finished">
+                                FINISHED
+                            </span>
+
+                            <div class="quick-actions">
+                                <a href="/task/edit?id=<?= $taskId ?>" class="more-btn" title="Editar tarea">
+                                    ⋯
+                                </a>
+                            </div>
+                        </article>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+                <?php if (!$hasFinished): ?>
+                    <p class="empty-state">No hay tareas terminadas.</p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+    </section>
+</div>

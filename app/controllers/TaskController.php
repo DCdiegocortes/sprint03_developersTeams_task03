@@ -39,9 +39,10 @@ class TaskController extends ApplicationController
             }
 
             $lastId = 0;
+
             foreach ($tasks as $task) {
-                if (isset($task['id']) && $task['id'] > $lastId) {
-                    $lastId = $task['id'];
+                if (isset($task['id']) && (int) $task['id'] > $lastId) {
+                    $lastId = (int) $task['id'];
                 }
             }
 
@@ -65,6 +66,95 @@ class TaskController extends ApplicationController
             $this->view->message = '✅ Tarea creada correctamente.';
         }
     }
+
+    public function editAction()
+    {
+        $this->view->message = null;
+        $this->view->error = null;
+        $this->view->task = null;
+
+        $id = $_POST['id'] ?? $_GET['id'] ?? null;
+
+        if ($id === null || !is_numeric($id)) {
+            $this->view->error = 'ID de tarea inválido.';
+            return;
+        }
+
+        $id = (int) $id;
+        $model = new Task();
+
+        $task = $model->getTaskById($id);
+
+        if ($task === null) {
+            $this->view->error = 'No se encontró la tarea indicada.';
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = trim($_POST['title'] ?? '');
+            $description = trim($_POST['description'] ?? '');
+            $userName = trim($_POST['user_name'] ?? '');
+            $status = strtoupper(trim($_POST['status'] ?? 'PENDING'));
+
+            if ($title === '' || $description === '' || $userName === '') {
+                $this->view->error = 'Todos los campos son obligatorios.';
+                $this->view->task = $task;
+                return;
+            }
+
+            if (!in_array($status, self::VALID_STATUSES, true)) {
+                $this->view->error = 'El estado no es válido.';
+                $this->view->task = $task;
+                return;
+            }
+
+            $updated = $model->updateTask($id, [
+                'title' => $title,
+                'description' => $description,
+                'user_name' => $userName,
+                'status' => $status
+            ]);
+
+            if (!$updated) {
+                $this->view->error = 'No se pudo actualizar la tarea.';
+                $this->view->task = $task;
+                return;
+            }
+
+            $this->view->message = '✅ Tarea actualizada correctamente.';
+            $this->view->task = $model->getTaskById($id);
+            return;
+        }
+
+        $this->view->task = $task;
+    }
+
+    public function playAction()
+    {
+        $id = $_GET['id'] ?? null;
+
+        if ($id !== null && is_numeric($id)) {
+            $model = new Task();
+            $model->updateTaskStatus((int) $id, 'IN_PROGRESS');
+        }
+
+        header('Location: /test');
+        exit;
+    }
+
+    public function finishAction()
+    {
+        $id = $_GET['id'] ?? null;
+
+        if ($id !== null && is_numeric($id)) {
+            $model = new Task();
+            $model->updateTaskStatus((int) $id, 'FINISHED');
+        }
+
+        header('Location: /test');
+        exit;
+    }
+
     public function deleteAction()
     {
         $this->view->message = null;

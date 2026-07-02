@@ -1,0 +1,329 @@
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: #71D7E8;
+        color: #18242B;
+    }
+
+    .page {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 720px;
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 28px;
+        padding: 40px;
+        box-shadow: 0 24px 60px rgba(0, 70, 90, 0.22);
+        box-sizing: border-box;
+    }
+
+    h1 {
+        margin: 0 0 12px;
+        font-size: 48px;
+        line-height: 1;
+        color: #F76BA6;
+        letter-spacing: -1px;
+    }
+
+    .message {
+        margin-bottom: 20px;
+        padding: 14px 16px;
+        border-radius: 16px;
+        font-weight: bold;
+    }
+
+    .message.error {
+        background: rgba(233, 54, 69, 0.12);
+        color: #9D1022;
+        border: 1px solid rgba(233, 54, 69, 0.35);
+    }
+
+    .message.success {
+        background: rgba(12, 182, 132, 0.12);
+        color: #087E5B;
+        border: 1px solid rgba(12, 182, 132, 0.35);
+    }
+
+    .task-form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 24px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    label {
+        font-size: 13px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #F76BA6;
+    }
+
+    input,
+    textarea,
+    select {
+        width: 100%;
+        border: 0;
+        border-radius: 18px;
+        padding: 16px 18px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.9);
+        color: #18242B;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        box-shadow: 0 0 0 3px rgba(247, 107, 166, 0.28);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .meta-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .meta-box {
+        width: 100%;
+        border: 0;
+        border-radius: 18px;
+        padding: 16px 18px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.75);
+        color: rgba(24, 36, 43, 0.75);
+        box-sizing: border-box;
+    }
+
+    .actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    .save-btn,
+    .cancel-btn,
+    .delete-link {
+        border: 0;
+        border-radius: 999px;
+        padding: 16px 24px;
+        font-size: 16px;
+        font-weight: 900;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .save-btn {
+        color: #FFFFFF;
+        background: #F76BA6;
+        box-shadow: 0 8px 0 #D94D87;
+    }
+
+    .save-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 0 #D94D87;
+    }
+
+    .save-btn:active {
+        transform: translateY(4px);
+        box-shadow: 0 4px 0 #D94D87;
+    }
+
+    .cancel-btn {
+        color: #18242B;
+        background: #E5E7EB;
+        box-shadow: 0 8px 0 #B8BDC7;
+    }
+
+    .cancel-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 0 #B8BDC7;
+    }
+
+    .delete-link {
+        color: #FFFFFF;
+        background: #E93645;
+        box-shadow: 0 8px 0 #A91522;
+    }
+
+    .delete-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 0 #A91522;
+    }
+
+    .delete-link:active {
+        transform: translateY(4px);
+        box-shadow: 0 4px 0 #A91522;
+    }
+
+    @media (max-width: 640px) {
+        .card {
+            padding: 28px;
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+
+        .meta-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+        .save-btn,
+        .cancel-btn,
+        .delete-link {
+            width: 100%;
+        }
+    }
+</style>
+
+<?php
+$task = $this->task;
+
+if (!is_array($task)) {
+    $task = null;
+}
+?>
+
+<main class="page">
+    <section class="card">
+        <h1>Perfil de tarea</h1>
+
+        <?php if (!empty($this->error)): ?>
+            <p class="message error"><?= htmlspecialchars($this->error, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($this->message)): ?>
+            <p class="message success"><?= htmlspecialchars($this->message, ENT_QUOTES, 'UTF-8') ?></p>
+        <?php endif; ?>
+
+        <?php if (!empty($task)): ?>
+            <form class="task-form" action="/task/edit" method="POST">
+            <input
+                    type="hidden"
+                    name="id"
+                    value="<?= htmlspecialchars($task['id'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+            >
+
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value="<?= htmlspecialchars($task['title'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <textarea
+                        id="description"
+                        name="description"
+                        required
+                ><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="user_name">Usuario</label>
+                <input
+                        type="text"
+                        id="user_name"
+                        name="user_name"
+                        value="<?= htmlspecialchars($task['user_name'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                        required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="status">Estado</label>
+                <select id="status" name="status">
+                    <option value="PENDING" <?= ($task['status'] ?? '') === 'PENDING' ? 'selected' : '' ?>>
+                        PENDING
+                    </option>
+
+                    <option value="IN_PROGRESS" <?= ($task['status'] ?? '') === 'IN_PROGRESS' ? 'selected' : '' ?>>
+                        IN_PROGRESS
+                    </option>
+
+                    <option value="FINISHED" <?= ($task['status'] ?? '') === 'FINISHED' ? 'selected' : '' ?>>
+                        FINISHED
+                    </option>
+                </select>
+            </div>
+
+            <div class="meta-grid">
+                <div class="form-group">
+                    <label for="created_at">Inicio</label>
+                    <input
+                            type="text"
+                            id="created_at"
+                            value="<?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>"
+                            readonly
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="finished_at">Fin</label>
+                    <input
+                            type="text"
+                            id="finished_at"
+                            value="<?= htmlspecialchars($task['finished_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>"
+                            readonly
+                    >
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="save-btn" type="submit">
+                    Guardar cambios
+                </button>
+
+                <a href="/test" class="cancel-btn">
+                    Cancelar
+                </a>
+
+            </div>
+            </form>
+
+        <?php else: ?>
+            <p class="message error">
+                No se pudo cargar la tarea seleccionada.
+            </p>
+        <?php endif; ?>
+    </section>
+</main>
