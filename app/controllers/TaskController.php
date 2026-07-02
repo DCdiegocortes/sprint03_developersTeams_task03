@@ -207,13 +207,8 @@ class TaskController extends ApplicationController
                 $jsonPath,
                 json_encode(array_values($tasks), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
             );
-
-            $this->view->message = $deletedTaskTitle !== ''
-                ? 'La tarea "' . $deletedTaskTitle . '" fue eliminada correctamente.'
-                : 'La tarea fue eliminada correctamente.';
-
-            $this->view->task = null;
-            return;
+            header('Location: /test?deleted=1');
+            exit;
         }
 
         $this->view->task = $tasks[$taskIndex];

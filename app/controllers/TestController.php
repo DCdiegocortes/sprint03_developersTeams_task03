@@ -20,6 +20,7 @@ class TestController extends ApplicationController
         $this->view->tasks = $model->getTasks($statusFilter, $searchQuery);
         $this->view->current_status = $statusFilter;
         $this->view->current_search = $searchQuery;
+        $this->view->delete_message = $_GET['deleted'] ?? null;
     }
 
     public function checkAction()

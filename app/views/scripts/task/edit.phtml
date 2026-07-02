@@ -168,23 +168,21 @@
         transform: translateY(-2px);
         box-shadow: 0 10px 0 #B8BDC7;
     }
-
     .delete-link {
         color: #FFFFFF;
-        background: #E93645;
-        box-shadow: 0 8px 0 #A91522;
+        background: #F76BA6;
+        box-shadow: 0 8px 0 #D94D87;
     }
 
     .delete-link:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 0 #A91522;
+        box-shadow: 0 10px 0 #D94D87;
     }
 
     .delete-link:active {
         transform: translateY(4px);
-        box-shadow: 0 4px 0 #A91522;
+        box-shadow: 0 4px 0 #D94D87;
     }
-
     @media (max-width: 640px) {
         .card {
             padding: 28px;
@@ -307,17 +305,25 @@ if (!is_array($task)) {
                     >
                 </div>
             </div>
+                <div class="actions">
+                    <button class="save-btn" type="submit">
+                        Guardar cambios
+                    </button>
 
-            <div class="actions">
-                <button class="save-btn" type="submit">
-                    Guardar cambios
-                </button>
+                    <a href="/test" class="cancel-btn">
+                        Cancelar
+                    </a>
 
-                <a href="/test" class="cancel-btn">
-                    Cancelar
-                </a>
-
-            </div>
+                    <button
+                            class="delete-link"
+                            type="submit"
+                            formaction="/task/delete"
+                            formmethod="POST"
+                    >
+                        🗑 Borrar tarea
+                    </button>
+                </div>
+                </div>
             </form>
 
         <?php else: ?>
