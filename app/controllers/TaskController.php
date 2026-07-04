@@ -63,7 +63,8 @@ class TaskController extends ApplicationController
                 json_encode($tasks, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
             );
 
-            $this->view->message = '✅ Tarea creada correctamente.';
+            header('Location: /?created=1');
+            exit;
         }
     }
 
