@@ -129,6 +129,7 @@
     }
 
     .task-card {
+        position: relative;
         background: rgba(255, 255, 255, 0.94);
         border-radius: 22px;
         padding: 22px;
@@ -142,6 +143,7 @@
         font-size: 22px;
         line-height: 1.15;
         color: #18242B;
+        padding-right: 44px;
     }
 
     .task-card p {
@@ -189,6 +191,73 @@
         font-weight: 800;
     }
 
+    .card-menu-btn {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        border-radius: 999px;
+        background: #E5E7EB;
+        color: #18242B;
+        box-shadow: 0 6px 0 #B8BDC7;
+        font-size: 20px;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .card-menu-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .quick-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 16px;
+    }
+
+    .icon-btn {
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 14px;
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #F76BA6;
+        color: #FFFFFF;
+        box-shadow: 0 6px 0 #D94D87;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .icon-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .message {
+        margin: 18px 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        font-weight: bold;
+    }
+
+    .message.success {
+        background: rgba(12, 182, 132, 0.12);
+        color: #087E5B;
+        border: 1px solid rgba(12, 182, 132, 0.35);
+    }
+
     @media (max-width: 900px) {
         .tasks-board {
             grid-template-columns: 1fr;
@@ -214,60 +283,6 @@
 
         .search-input {
             min-width: 0;
-        }
-        .quick-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            align-items: center;
-            margin-top: 16px;
-        }
-
-        .icon-btn,
-        .more-btn {
-            border: 0;
-            border-radius: 999px;
-            padding: 11px 14px;
-            font-size: 14px;
-            font-weight: 900;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .icon-btn {
-            background: #F76BA6;
-            color: #FFFFFF;
-            box-shadow: 0 6px 0 #D94D87;
-        }
-
-        .more-btn {
-            min-width: 46px;
-            background: #E5E7EB;
-            color: #18242B;
-            box-shadow: 0 6px 0 #B8BDC7;
-            font-size: 20px;
-            line-height: 1;
-        }
-
-        .icon-btn:hover,
-        .more-btn:hover {
-            transform: translateY(-2px);
-        }
-        .message {
-            margin: 18px 0;
-            padding: 14px 16px;
-            border-radius: 16px;
-            font-weight: bold;
-        }
-
-        .message.success {
-            background: rgba(12, 182, 132, 0.12);
-            color: #087E5B;
-            border: 1px solid rgba(12, 182, 132, 0.35);
         }
     }
 </style>
@@ -349,6 +364,10 @@ $currentSearch = $this->current_search ?? '';
                         ?>
 
                         <article class="task-card">
+                            <a href="/task/edit?id=<?= $taskId ?>" class="card-menu-btn" title="Editar tarea">
+                                ⋯
+                            </a>
+
                             <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
 
                             <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
@@ -368,10 +387,6 @@ $currentSearch = $this->current_search ?? '';
                             <div class="quick-actions">
                                 <a href="/task/play?id=<?= $taskId ?>" class="icon-btn">
                                     ▶️ Play
-                                </a>
-
-                                <a href="/task/edit?id=<?= $taskId ?>" class="more-btn" title="Editar tarea">
-                                    ⋯
                                 </a>
                             </div>
                         </article>
@@ -398,6 +413,10 @@ $currentSearch = $this->current_search ?? '';
                         ?>
 
                         <article class="task-card">
+                            <a href="/task/edit?id=<?= $taskId ?>" class="card-menu-btn" title="Editar tarea">
+                                ⋯
+                            </a>
+
                             <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
 
                             <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
@@ -417,10 +436,6 @@ $currentSearch = $this->current_search ?? '';
                             <div class="quick-actions">
                                 <a href="/task/finish?id=<?= $taskId ?>" class="icon-btn">
                                     ✅ Terminar
-                                </a>
-
-                                <a href="/task/edit?id=<?= $taskId ?>" class="more-btn" title="Editar tarea">
-                                    ⋯
                                 </a>
                             </div>
                         </article>
@@ -447,6 +462,10 @@ $currentSearch = $this->current_search ?? '';
                         ?>
 
                         <article class="task-card">
+                            <a href="/task/edit?id=<?= $taskId ?>" class="card-menu-btn" title="Editar tarea">
+                                ⋯
+                            </a>
+
                             <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
 
                             <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
@@ -466,12 +485,6 @@ $currentSearch = $this->current_search ?? '';
                             <span class="status-pill status-finished">
                                 FINISHED
                             </span>
-
-                            <div class="quick-actions">
-                                <a href="/task/edit?id=<?= $taskId ?>" class="more-btn" title="Editar tarea">
-                                    ⋯
-                                </a>
-                            </div>
                         </article>
                     <?php endif; ?>
                 <?php endforeach; ?>
