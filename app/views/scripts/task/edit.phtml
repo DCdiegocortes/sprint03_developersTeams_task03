@@ -120,10 +120,18 @@
     }
 
     .actions {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    }
+
+    .actions-left {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
     }
 
     .save-btn,
@@ -198,6 +206,12 @@
 
         .actions {
             flex-direction: column;
+            align-items: stretch;
+        }
+
+        .actions-left {
+            flex-direction: column;
+            width: 100%;
         }
 
         .save-btn,
@@ -305,24 +319,26 @@ if (!is_array($task)) {
                     >
                 </div>
             </div>
-                <div class="actions">
+            <div class="actions">
+                <div class="actions-left">
                     <button class="save-btn" type="submit">
                         Guardar cambios
                     </button>
 
-                    <a href="/test" class="cancel-btn">
-                        Cancelar
-                    </a>
-
                     <button
-                            class="delete-link"
-                            type="submit"
-                            formaction="/task/delete"
-                            formmethod="POST"
+                        class="delete-link"
+                        type="submit"
+                        formaction="/task/delete"
+                        formmethod="POST"
                     >
                         🗑 Borrar tarea
                     </button>
                 </div>
+
+                <a href="/test" class="cancel-btn">
+                    Cancelar
+                </a>
+            </div>
                 </div>
             </form>
 
