@@ -16,6 +16,11 @@
 
     .dashboard-header {
         margin-bottom: 28px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
     }
 
     .dashboard-header h1 {
@@ -300,9 +305,15 @@ $currentSearch = $this->current_search ?? '';
 
 <div class="dashboard-page">
     <section class="dashboard-header">
+    <div class="dashboard-header-text">
         <h1>¿Qué quieres hacer hoy?</h1>
         <p>Organiza tus tareas, revisa su estado y mantén el control del trabajo pendiente.</p>
-    </section>
+    </div>
+
+    <a href="/" class="btn btn-light">
+        🏠 Inicio
+    </a>
+</section>
 
     <?php if (!empty($this->delete_message)): ?>
         <p class="message success">La tarea se ha borrado correctamente.</p>
