@@ -122,9 +122,8 @@ class TaskController extends ApplicationController
                 return;
             }
 
-            $this->view->message = '✅ Tarea actualizada correctamente.';
-            $this->view->task = $model->getTaskById($id);
-            return;
+            header('Location: /test?edited=1');
+            exit;
         }
 
         $this->view->task = $task;

@@ -305,7 +305,11 @@ $currentSearch = $this->current_search ?? '';
     </section>
 
     <?php if (!empty($this->delete_message)): ?>
-        <p class="message success">La tarea fue eliminada correctamente.</p>
+        <p class="message success">La tarea se ha borrado correctamente.</p>
+    <?php endif; ?>
+
+    <?php if (isset($_GET['edited']) && $_GET['edited'] === '1'): ?>
+        <p class="message success">La tarea se ha editado correctamente.</p>
     <?php endif; ?>
 
     <section id="task_filter_panel" class="panel filter-panel">
