@@ -57,7 +57,7 @@ screenshots/project-structure.png
 
 ### 1. Clone the repository
 
-git clone https://github.com/your-username/your-repository.git
+git clone (https://github.com/DCdiegocortes/sprint03_developersTeams_task03.git)
 
 ### 2. Navigate to the project directory
 
@@ -125,19 +125,6 @@ Allows users to modify existing task information.
 ### Delete Task
 
 Removes tasks permanently from storage.
-
----
-
-##  Design System
-
-The interface follows a custom design language based on:
-
-- Glassmorphism
-- Bubblegum Pink
-- Baby Blue
-- Open Sauce Typography
-- Responsive Layout
-- Modern UI Components
 
 ---
 
