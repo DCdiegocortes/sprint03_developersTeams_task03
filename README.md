@@ -142,21 +142,16 @@ The interface follows a custom design language based on:
 ## Screenshots
 
 ### Home Page
-
-screenshots/home.png
+![Home Page](screenshots/home.png)
 
 ### Create Task
-
-screenshots/create-task.png
+![Create Task](screenshots/create-task.png)
 
 ### Edit Task
-
-screenshots/edit-task.png
+![Edit Task](screenshots/edit-task.png)
 
 ### Quick Edit
-
-screenshots/quick-edit.png
+![Quick Edit](screenshots/quick-edit.png)
 
 ### Project Structure
-
-screenshots/project-structure.png
+![Project Structure](screenshots/project-structure.png)
