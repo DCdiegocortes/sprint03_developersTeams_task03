@@ -40,20 +40,7 @@ A web application for task management developed using **PHP** and the **MVC (Mod
 
 ##  Project Structure
 
-text
-project/
-│
-├── app/
-│   ├── controllers/
-│   ├── models/
-│   └── views/
-│
-├── web/
-│
-├── tasks.json
-│
-└── README.md
-
+screenshots/project-structure.png
 
 ---
 
