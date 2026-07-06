@@ -57,27 +57,19 @@ screenshots/project-structure.png
 
 ### 1. Clone the repository
 
-bash
 git clone https://github.com/your-username/your-repository.git
-
 
 ### 2. Navigate to the project directory
 
-bash
 cd sprint03_developersTeams_task03
-
 
 ### 3. Install dependencies
 
-bash
 npm install
-
 
 ### 4. Start the PHP development server
 
-bash
 php -S localhost:8000 -t web
-
 
 ### 5. Open the application in your browser
 
