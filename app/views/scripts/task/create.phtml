@@ -1,204 +1,87 @@
-<style>
-    body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background: #71D7E8;
-        color: #18242B;
-    }
+<main class="min-h-screen flex justify-center items-center p-10 px-5" style="background:#71D7E8; color:#18242B; font-family: Arial, sans-serif;">
+    <section class="relative w-full max-w-[620px] rounded-[28px] p-10 box-border" style="background: rgba(255,255,255,0.85); box-shadow: 0 24px 60px rgba(0,70,90,0.22);">
+        <a href="/" title="Cancelar y volver al inicio"
+           class="absolute top-6 right-6 w-9 h-9 rounded-full inline-flex items-center justify-center text-xl leading-none no-underline cursor-pointer transition-transform duration-150 hover:-translate-y-0.5"
+           style="background:#E5E7EB; color:#18242B;">
+            &times;
+        </a>
 
-    .page {
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 20px;
-    }
+        <h1 class="m-0 mb-3 text-5xl leading-none tracking-tight" style="color:#F76BA6;">Crear tarea</h1>
 
-    .card {
-        width: 100%;
-        max-width: 620px;
-        background: rgba(255, 255, 255, 0.85);
-        border-radius: 28px;
-        padding: 40px;
-        box-shadow: 0 24px 60px rgba(0, 70, 90, 0.22);
-    }
-
-    h1 {
-        margin: 0 0 12px;
-        font-size: 48px;
-        line-height: 1;
-        color: #F76BA6;
-        letter-spacing: -1px;
-    }
-
-    .subtitle {
-        margin: 0 0 28px;
-        font-size: 16px;
-        line-height: 1.5;
-        color: rgba(24, 36, 43, 0.75);
-    }
-
-    .message {
-        margin-bottom: 20px;
-        padding: 14px 16px;
-        border-radius: 16px;
-        font-weight: bold;
-    }
-
-    .message.error {
-        background: rgba(233, 54, 69, 0.12);
-        color: #9D1022;
-        border: 1px solid rgba(233, 54, 69, 0.35);
-    }
-
-    .message.success {
-        background: rgba(12, 182, 132, 0.12);
-        color: #087E5B;
-        border: 1px solid rgba(12, 182, 132, 0.35);
-    }
-
-    .task-form {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    label {
-        font-size: 13px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #F76BA6;
-    }
-
-    input,
-    textarea,
-    select {
-        width: 100%;
-        border: 0;
-        border-radius: 18px;
-        padding: 16px 18px;
-        font-size: 16px;
-        font-family: Arial, sans-serif;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.9);
-        color: #18242B;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-        box-shadow: 0 0 0 3px rgba(247, 107, 166, 0.28);
-    }
-
-    textarea {
-        resize: vertical;
-        min-height: 120px;
-    }
-
-    .submit-btn {
-        margin-top: 8px;
-        border: 0;
-        border-radius: 999px;
-        padding: 16px 24px;
-        font-size: 18px;
-        font-weight: 900;
-        color: #FFFFFF;
-        background: #F76BA6;
-        cursor: pointer;
-        box-shadow: 0 8px 0 #D94D87;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .submit-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 0 #D94D87;
-    }
-
-    .submit-btn:active {
-        transform: translateY(4px);
-        box-shadow: 0 4px 0 #D94D87;
-    }
-
-    @media (max-width: 640px) {
-        .card {
-            padding: 28px;
-        }
-
-        h1 {
-            font-size: 38px;
-        }
-    }
-</style>
-
-<main class="page">
-    <section class="card">
-        <h1>Crear tarea</h1>
-
-        <p class="subtitle">
-            Completá los datos para crear una nueva tarea y guardarla en el archivo JSON.
+        <p class="m-0 mb-7 text-base leading-relaxed" style="color: rgba(24,36,43,0.75);">
+            Completá los datos para crear una nueva tarea
         </p>
 
         <?php if (!empty($this->error)): ?>
-            <p class="message error"><?= htmlspecialchars($this->error) ?></p>
+            <p class="mb-5 py-3.5 px-4 rounded-2xl font-bold" style="background: rgba(233,54,69,0.12); color:#9D1022; border:1px solid rgba(233,54,69,0.35);">
+                <?= htmlspecialchars($this->error) ?>
+            </p>
         <?php endif; ?>
 
         <?php if (!empty($this->message)): ?>
-            <p class="message success"><?= htmlspecialchars($this->message) ?></p>
+            <p class="mb-5 py-3.5 px-4 rounded-2xl font-bold" style="background: rgba(12,182,132,0.12); color:#087E5B; border:1px solid rgba(12,182,132,0.35);">
+                <?= htmlspecialchars($this->message) ?>
+            </p>
         <?php endif; ?>
 
-        <form class="task-form" action="/task/create" method="POST">
-            <div class="form-group">
-                <label for="user_name">Usuario</label>
+        <form class="flex flex-col gap-[18px]" action="/task/create" method="POST">
+            <div class="flex flex-col gap-2">
+                <label for="user_name" class="text-[13px] font-extrabold uppercase tracking-wider" style="color:#F76BA6;">Usuario</label>
                 <input
                         type="text"
                         id="user_name"
                         name="user_name"
                         placeholder="Ej: Diego"
                         required
+                        class="w-full border-0 rounded-2xl py-4 px-[18px] text-base font-semibold outline-none box-border focus:ring-[3px]"
+                        style="background: rgba(255,255,255,0.9); color:#18242B; --tw-ring-color: rgba(247,107,166,0.28);"
                 >
             </div>
 
-            <div class="form-group">
-                <label for="title">Título</label>
+            <div class="flex flex-col gap-2">
+                <label for="title" class="text-[13px] font-extrabold uppercase tracking-wider" style="color:#F76BA6;">Título</label>
                 <input
                         type="text"
                         id="title"
                         name="title"
                         placeholder="Ej: Sacar a pasear al perro"
                         required
+                        class="w-full border-0 rounded-2xl py-4 px-[18px] text-base font-semibold outline-none box-border focus:ring-[3px]"
+                        style="background: rgba(255,255,255,0.9); color:#18242B; --tw-ring-color: rgba(247,107,166,0.28);"
                 >
             </div>
 
-            <div class="form-group">
-                <label for="description">Descripción</label>
+            <div class="flex flex-col gap-2">
+                <label for="description" class="text-[13px] font-extrabold uppercase tracking-wider" style="color:#F76BA6;">Descripción</label>
                 <textarea
                         id="description"
                         name="description"
                         placeholder="Ej: Paseo de 30 minutos"
                         required
+                        class="w-full border-0 rounded-2xl py-4 px-[18px] text-base font-semibold outline-none box-border resize-y min-h-[120px] focus:ring-[3px]"
+                        style="background: rgba(255,255,255,0.9); color:#18242B; --tw-ring-color: rgba(247,107,166,0.28);"
                 ></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="status">Estado</label>
-                <select id="status" name="status">
-                    <option value="PENDING">PENDING</option>
-                    <option value="IN_PROGRESS">IN_PROGRESS</option>
-                    <option value="FINISHED">FINISHED</option>
+            <div class="flex flex-col gap-2">
+                <label for="status" class="text-[13px] font-extrabold uppercase tracking-wider" style="color:#F76BA6;">Estado</label>
+                <select
+                        id="status"
+                        name="status"
+                        class="w-full border-0 rounded-2xl py-4 px-[18px] text-base font-semibold outline-none box-border focus:ring-[3px]"
+                        style="background: rgba(255,255,255,0.9); color:#18242B; --tw-ring-color: rgba(247,107,166,0.28);"
+                >
+                    <option value="PENDING">Pendiente</option>
+                    <option value="IN_PROGRESS">En ejecución</option>
+                    <option value="FINISHED">Terminada</option>
                 </select>
             </div>
 
-            <button class="submit-btn" type="submit">
+            <button
+                    type="submit"
+                    class="mt-2 border-0 rounded-full py-4 px-6 text-lg font-black text-white cursor-pointer transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-1"
+                    style="background:#F76BA6; box-shadow: 0 8px 0 #D94D87;"
+            >
                 Guardar tarea
             </button>
         </form>
