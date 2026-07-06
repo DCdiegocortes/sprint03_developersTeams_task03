@@ -75,8 +75,18 @@ if (!is_array($task)) {
                             class="w-full border-0 rounded-2xl py-4 px-[18px] text-base font-semibold outline-none box-border focus:ring-[3px]"
                             style="background: rgba(255,255,255,0.9); color:#18242B; --tw-ring-color: rgba(247,107,166,0.28);"
                     >
-                        🗑 Borrar tarea
-                    </button>
+                        <option value="PENDING" <?= ($task['status'] ?? '') === 'PENDING' ? 'selected' : '' ?>>
+                            Pendiente
+                        </option>
+
+                        <option value="IN_PROGRESS" <?= ($task['status'] ?? '') === 'IN_PROGRESS' ? 'selected' : '' ?>>
+                            En ejecución
+                        </option>
+
+                        <option value="FINISHED" <?= ($task['status'] ?? '') === 'FINISHED' ? 'selected' : '' ?>>
+                            Finalizada
+                        </option>
+                    </select>
                 </div>
 
                 <div class="grid grid-cols-2 gap-[18px] max-[640px]:grid-cols-1">
