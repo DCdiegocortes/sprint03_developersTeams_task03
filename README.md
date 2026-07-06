@@ -151,13 +151,12 @@ screenshots/create-task.png
 
 ### Edit Task
 
-screenshots/edit-task.png
+![Edit Task](screenshotsg
 
 ### Quick Edit
 
-screenshots/quick-edit.png
+![Quick Edit](ick-edit.png
 
 ### Project Structure
 
-screenshots/project-structure.png
-
+![Project Structure](screenshots/
