@@ -1,297 +1,3 @@
-<style>
-    body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: Arial, sans-serif;
-        background: #71D7E8;
-        color: #18242B;
-    }
-
-    .dashboard-page {
-        width: min(1180px, 94vw);
-        margin: 0 auto;
-        padding: 40px 0;
-        box-sizing: border-box;
-    }
-
-    .dashboard-header {
-        margin-bottom: 28px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
-    .dashboard-header h1 {
-        margin: 0 0 10px;
-        font-size: 48px;
-        line-height: 1;
-        color: #F76BA6;
-        letter-spacing: -1px;
-    }
-
-    .dashboard-header p,
-    .note {
-        margin: 0;
-        color: rgba(24, 36, 43, 0.75);
-        font-weight: 700;
-        line-height: 1.5;
-    }
-
-    .panel {
-        background: rgba(255, 255, 255, 0.88);
-        border-radius: 28px;
-        padding: 32px;
-        box-shadow: 0 24px 60px rgba(0, 70, 90, 0.22);
-        margin-bottom: 28px;
-        box-sizing: border-box;
-    }
-
-    .panel h2 {
-        margin: 0 0 10px;
-        font-size: 32px;
-        color: #F76BA6;
-    }
-
-    .filter-actions {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-        margin-top: 20px;
-        align-items: center;
-    }
-
-    .input {
-        border: 0;
-        border-radius: 18px;
-        padding: 15px 18px;
-        font-size: 16px;
-        font-family: Arial, sans-serif;
-        font-weight: 700;
-        background: rgba(255, 255, 255, 0.95);
-        color: #18242B;
-        outline: none;
-        box-sizing: border-box;
-    }
-
-    .search-input {
-        min-width: 260px;
-        flex: 1;
-    }
-
-    .btn {
-        border: 0;
-        border-radius: 999px;
-        padding: 15px 22px;
-        font-size: 15px;
-        font-weight: 900;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-        box-sizing: border-box;
-    }
-
-    .btn-primary {
-        color: #FFFFFF;
-        background: #F76BA6;
-        box-shadow: 0 8px 0 #D94D87;
-    }
-
-    .btn-light {
-        color: #18242B;
-        background: #E5E7EB;
-        box-shadow: 0 8px 0 #B8BDC7;
-    }
-
-    .btn:hover {
-        transform: translateY(-2px);
-    }
-
-    .tasks-board {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
-    }
-
-    .task-column {
-        min-height: 620px;
-        background: rgba(255, 255, 255, 0.55);
-        border-radius: 26px;
-        padding: 22px;
-        box-shadow: 0 18px 40px rgba(0, 70, 90, 0.16);
-        box-sizing: border-box;
-    }
-
-    .task-column h2 {
-        margin: 0 0 22px;
-        font-size: 30px;
-        color: #F76BA6;
-        letter-spacing: -0.5px;
-    }
-
-    .task-card {
-        position: relative;
-        background: rgba(255, 255, 255, 0.94);
-        border-radius: 22px;
-        padding: 22px;
-        margin-bottom: 18px;
-        box-shadow: 0 10px 28px rgba(0, 70, 90, 0.12);
-        box-sizing: border-box;
-    }
-
-    .task-card h3 {
-        margin: 0 0 10px;
-        font-size: 22px;
-        line-height: 1.15;
-        color: #18242B;
-        padding-right: 44px;
-    }
-
-    .task-card p {
-        margin: 0 0 14px;
-        color: rgba(24, 36, 43, 0.78);
-        line-height: 1.45;
-        font-weight: 600;
-    }
-
-    .task-card small {
-        display: block;
-        color: rgba(24, 36, 43, 0.68);
-        font-weight: 800;
-        margin-top: 6px;
-    }
-
-    .status-pill {
-        display: inline-flex;
-        width: fit-content;
-        margin-top: 14px;
-        padding: 9px 13px;
-        border-radius: 999px;
-        font-size: 13px;
-        font-weight: 900;
-    }
-
-    .status-pending {
-        background: rgba(255, 193, 7, 0.22);
-        color: #856404;
-    }
-
-    .status-progress {
-        background: rgba(59, 130, 246, 0.18);
-        color: #1D4ED8;
-    }
-
-    .status-finished {
-        background: rgba(34, 197, 94, 0.18);
-        color: #166534;
-    }
-
-    .empty-state {
-        margin: 0;
-        color: rgba(24, 36, 43, 0.58);
-        font-weight: 800;
-    }
-
-    .card-menu-btn {
-        position: absolute;
-        top: 18px;
-        right: 18px;
-        width: 40px;
-        height: 40px;
-        border: 0;
-        border-radius: 999px;
-        background: #E5E7EB;
-        color: #18242B;
-        box-shadow: 0 6px 0 #B8BDC7;
-        font-size: 20px;
-        line-height: 1;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        cursor: pointer;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .card-menu-btn:hover {
-        transform: translateY(-2px);
-    }
-
-    .quick-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        margin-top: 16px;
-    }
-
-    .icon-btn {
-        border: 0;
-        border-radius: 999px;
-        padding: 11px 14px;
-        font-size: 14px;
-        font-weight: 900;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: #F76BA6;
-        color: #FFFFFF;
-        box-shadow: 0 6px 0 #D94D87;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .icon-btn:hover {
-        transform: translateY(-2px);
-    }
-
-    .message {
-        margin: 18px 0;
-        padding: 14px 16px;
-        border-radius: 16px;
-        font-weight: bold;
-    }
-
-    .message.success {
-        background: rgba(12, 182, 132, 0.12);
-        color: #087E5B;
-        border: 1px solid rgba(12, 182, 132, 0.35);
-    }
-
-    @media (max-width: 900px) {
-        .tasks-board {
-            grid-template-columns: 1fr;
-        }
-
-        .task-column {
-            min-height: auto;
-        }
-
-        .dashboard-header h1 {
-            font-size: 38px;
-        }
-
-        .filter-actions {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .input,
-        .btn {
-            width: 100%;
-        }
-
-        .search-input {
-            min-width: 0;
-        }
-    }
-</style>
-
 <?php
 $tasks = $this->tasks;
 
@@ -301,38 +7,58 @@ if (!is_array($tasks)) {
 
 $currentStatus = $this->current_status ?? '';
 $currentSearch = $this->current_search ?? '';
+
+// Clases reutilizables para mantener el archivo legible
+$btnBase = 'border-0 rounded-full py-[15px] px-[22px] text-[15px] font-black cursor-pointer no-underline inline-flex items-center justify-center transition-transform duration-150 hover:-translate-y-0.5 box-border max-[900px]:w-full';
+$btnPrimary = $btnBase . ' text-white';
+$btnLight = $btnBase . ' text-[#18242B]';
+$inputBase = 'border-0 rounded-2xl py-[15px] px-[18px] text-base font-bold bg-[rgba(255,255,255,0.95)] text-[#18242B] outline-none box-border max-[900px]:w-full';
 ?>
 
-<div class="dashboard-page">
-    <section class="dashboard-header">
-    <div class="dashboard-header-text">
-        <h1>¿Qué quieres hacer hoy?</h1>
-        <p>Organiza tus tareas, revisa su estado y mantén el control del trabajo pendiente.</p>
-    </div>
+<style>
+    @font-face {
+        font-family: 'OkineSans';
+        src: url('/fonts/MADEOkineSansPERSONALUSE-Bold.otf') format('opentype');
+        font-weight: 700;
+        font-style: normal;
+    }
+</style>
 
-    <a href="/" class="btn btn-light">
-        🏠 Inicio
-    </a>
-</section>
+<div class="min-h-screen box-border" style="font-family: Arial, sans-serif; background:#71D7E8; color:#18242B;">
+<div class="w-[min(1180px,94vw)] mx-auto py-10 box-border">
+    <section class="mb-7 flex items-start justify-between gap-5 flex-wrap">
+        <div>
+            <h1 class="m-0 mb-2.5 text-5xl leading-none tracking-tight max-[900px]:text-[38px]" style="color:#F76BA6; font-family: 'OkineSans', Arial, sans-serif;">¿Qué quieres hacer hoy?</h1>
+            <p class="m-0 font-bold leading-relaxed" style="color: rgba(24,36,43,0.75);">Organiza tus tareas, revisa su estado y mantén el control del trabajo pendiente.</p>
+        </div>
+
+        <a href="/" class="<?= $btnLight ?>" style="background:#E5E7EB; box-shadow: 0 8px 0 #B8BDC7;">
+            🏠 Inicio
+        </a>
+    </section>
 
     <?php if (!empty($this->delete_message)): ?>
-        <p class="message success">La tarea se ha borrado correctamente.</p>
+        <p class="my-[18px] py-3.5 px-4 rounded-2xl font-bold" style="background: rgba(12,182,132,0.12); color:#087E5B; border:1px solid rgba(12,182,132,0.35);">
+            La tarea se ha borrado correctamente.
+        </p>
     <?php endif; ?>
 
     <?php if (isset($_GET['edited']) && $_GET['edited'] === '1'): ?>
-        <p class="message success">La tarea se ha editado correctamente.</p>
+        <p class="my-[18px] py-3.5 px-4 rounded-2xl font-bold" style="background: rgba(12,182,132,0.12); color:#087E5B; border:1px solid rgba(12,182,132,0.35);">
+            La tarea se ha editado correctamente.
+        </p>
     <?php endif; ?>
 
-    <section id="task_filter_panel" class="panel filter-panel">
-        <h2>Listar tareas</h2>
-        <p class="note">Elige cómo quieres visualizar las tareas.</p>
+    <section id="task_filter_panel" class="rounded-[28px] p-8 shadow-[0_24px_60px_rgba(0,70,90,0.22)] mb-7 box-border" style="background: rgba(255,255,255,0.88);">
+        <h2 class="m-0 mb-2.5 text-3xl" style="color:#F76BA6;">Listar tareas</h2>
+        <p class="m-0 font-bold leading-relaxed" style="color: rgba(24,36,43,0.75);">Elige cómo quieres visualizar las tareas.</p>
 
-        <form method="GET" action="/test" class="filter-actions">
-            <a href="/test" class="btn btn-light">
+        <form method="GET" action="/test" class="flex gap-3.5 flex-wrap mt-5 items-center max-[900px]:flex-col max-[900px]:items-stretch">
+            <a href="/test" class="<?= $btnLight ?>" style="background:#E5E7EB; box-shadow: 0 8px 0 #B8BDC7;">
                 Ver todas
             </a>
 
-            <select class="input" name="status_filter">
+            <select class="<?= $inputBase ?>" name="status_filter">
                 <option value="" <?= empty($currentStatus) ? 'selected' : '' ?>>
                     Ver por estado
                 </option>
@@ -351,23 +77,23 @@ $currentSearch = $this->current_search ?? '';
             </select>
 
             <input
-                    class="input search-input"
+                    class="<?= $inputBase ?> min-w-[260px] flex-1 max-[900px]:min-w-0"
                     type="text"
                     name="search"
                     placeholder="Filtrar por título"
                     value="<?= htmlspecialchars($currentSearch, ENT_QUOTES, 'UTF-8') ?>"
             >
 
-            <button class="btn btn-primary" type="submit">
+            <button class="<?= $btnPrimary ?>" type="submit" style="background:#F76BA6; box-shadow: 0 8px 0 #D94D87;">
                 Buscar
             </button>
         </form>
     </section>
 
-    <section class="tasks-board">
+    <section class="grid grid-cols-3 gap-[22px] max-[900px]:grid-cols-1">
         <?php if (empty($currentStatus) || $currentStatus === 'PENDING'): ?>
-            <div class="task-column">
-                <h2>Pendientes</h2>
+            <div class="min-h-[620px] max-[900px]:min-h-0 rounded-[26px] p-[22px] shadow-[0_18px_40px_rgba(0,70,90,0.16)] box-border" style="background: rgba(255,255,255,0.55);">
+                <h2 class="m-0 mb-[22px] text-[30px] tracking-[-0.5px]" style="color:#F76BA6;">Pendientes</h2>
 
                 <?php $hasPending = false; ?>
 
@@ -378,20 +104,20 @@ $currentSearch = $this->current_search ?? '';
                         $taskId = urlencode((string) ($task['id'] ?? ''));
                         ?>
 
-                        <article class="task-card">
-                            <a href="/task/edit?id=<?= $taskId ?>" class="card-menu-btn" title="Editar tarea">
-                                ⋯
-                            </a>
+                        <article class="relative rounded-[22px] p-[22px] mb-[18px] shadow-[0_10px_28px_rgba(0,70,90,0.12)] box-border" style="background: rgba(255,255,255,0.94);">
+                            <h3 class="m-0 mb-2.5 text-[22px] leading-[1.15]" style="color:#18242B;">
+                                <?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?>
+                            </h3>
 
-                            <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
+                            <p class="m-0 mb-3.5 leading-[1.45] font-semibold" style="color: rgba(24,36,43,0.78);">
+                                <?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                            </p>
 
-                            <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
-
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 Creado por: <?= htmlspecialchars($task['user_name'] ?? 'Anónimo', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 ⏱️ Creada: <?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
@@ -399,8 +125,10 @@ $currentSearch = $this->current_search ?? '';
                                 PENDING
                             </span>
 
-                            <div class="quick-actions">
-                                <a href="/task/play?id=<?= $taskId ?>" class="icon-btn">
+                            <div class="flex items-center justify-between gap-2.5 mt-4">
+                                <a href="/task/play?id=<?= $taskId ?>"
+                                   class="border-0 rounded-full py-[11px] px-[14px] text-sm font-black cursor-pointer no-underline inline-flex items-center justify-center text-white transition-transform duration-150 hover:-translate-y-0.5"
+                                   style="background:#F76BA6; box-shadow: 0 6px 0 #D94D87;">
                                     ▶️ Play
                                 </a>
                             </div>
@@ -409,14 +137,14 @@ $currentSearch = $this->current_search ?? '';
                 <?php endforeach; ?>
 
                 <?php if (!$hasPending): ?>
-                    <p class="empty-state">No hay tareas pendientes.</p>
+                    <p class="m-0 font-extrabold" style="color: rgba(24,36,43,0.58);">No hay tareas pendientes.</p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
 
         <?php if (empty($currentStatus) || $currentStatus === 'IN_PROGRESS'): ?>
-            <div class="task-column">
-                <h2>En ejecución</h2>
+            <div class="min-h-[620px] max-[900px]:min-h-0 rounded-[26px] p-[22px] shadow-[0_18px_40px_rgba(0,70,90,0.16)] box-border" style="background: rgba(255,255,255,0.55);">
+                <h2 class="m-0 mb-[22px] text-[30px] tracking-[-0.5px]" style="color:#F76BA6;">En ejecución</h2>
 
                 <?php $hasProgress = false; ?>
 
@@ -427,20 +155,20 @@ $currentSearch = $this->current_search ?? '';
                         $taskId = urlencode((string) ($task['id'] ?? ''));
                         ?>
 
-                        <article class="task-card">
-                            <a href="/task/edit?id=<?= $taskId ?>" class="card-menu-btn" title="Editar tarea">
-                                ⋯
-                            </a>
+                        <article class="relative rounded-[22px] p-[22px] mb-[18px] shadow-[0_10px_28px_rgba(0,70,90,0.12)] box-border" style="background: rgba(255,255,255,0.94);">
+                            <h3 class="m-0 mb-2.5 text-[22px] leading-[1.15]" style="color:#18242B;">
+                                <?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?>
+                            </h3>
 
-                            <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
+                            <p class="m-0 mb-3.5 leading-[1.45] font-semibold" style="color: rgba(24,36,43,0.78);">
+                                <?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                            </p>
 
-                            <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
-
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 Creado por: <?= htmlspecialchars($task['user_name'] ?? 'Anónimo', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 ⏱️ Inicio: <?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
@@ -448,8 +176,10 @@ $currentSearch = $this->current_search ?? '';
                                 IN_PROGRESS
                             </span>
 
-                            <div class="quick-actions">
-                                <a href="/task/finish?id=<?= $taskId ?>" class="icon-btn">
+                            <div class="flex items-center justify-between gap-2.5 mt-4">
+                                <a href="/task/finish?id=<?= $taskId ?>"
+                                   class="border-0 rounded-full py-[11px] px-[14px] text-sm font-black cursor-pointer no-underline inline-flex items-center justify-center text-white transition-transform duration-150 hover:-translate-y-0.5"
+                                   style="background:#F76BA6; box-shadow: 0 6px 0 #D94D87;">
                                     ✅ Terminar
                                 </a>
                             </div>
@@ -458,14 +188,14 @@ $currentSearch = $this->current_search ?? '';
                 <?php endforeach; ?>
 
                 <?php if (!$hasProgress): ?>
-                    <p class="empty-state">No hay tareas en ejecución.</p>
+                    <p class="m-0 font-extrabold" style="color: rgba(24,36,43,0.58);">No hay tareas en ejecución.</p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
 
         <?php if (empty($currentStatus) || $currentStatus === 'FINISHED'): ?>
-            <div class="task-column">
-                <h2>Terminadas</h2>
+            <div class="min-h-[620px] max-[900px]:min-h-0 rounded-[26px] p-[22px] shadow-[0_18px_40px_rgba(0,70,90,0.16)] box-border" style="background: rgba(255,255,255,0.55);">
+                <h2 class="m-0 mb-[22px] text-[30px] tracking-[-0.5px]" style="color:#F76BA6;">Terminadas</h2>
 
                 <?php $hasFinished = false; ?>
 
@@ -476,38 +206,56 @@ $currentSearch = $this->current_search ?? '';
                         $taskId = urlencode((string) ($task['id'] ?? ''));
                         ?>
 
-                        <article class="task-card">
-                            <a href="/task/edit?id=<?= $taskId ?>" class="card-menu-btn" title="Editar tarea">
-                                ⋯
-                            </a>
+                        <article class="relative rounded-[22px] p-[22px] mb-[18px] shadow-[0_10px_28px_rgba(0,70,90,0.12)] box-border" style="background: rgba(255,255,255,0.94);">
+                            <h3 class="m-0 mb-2.5 text-[22px] leading-[1.15]" style="color:#18242B;">
+                                <?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?>
+                            </h3>
 
-                            <h3><?= htmlspecialchars($task['title'] ?? 'Sin título', ENT_QUOTES, 'UTF-8') ?></h3>
+                            <p class="m-0 mb-3.5 leading-[1.45] font-semibold" style="color: rgba(24,36,43,0.78);">
+                                <?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                            </p>
 
-                            <p><?= htmlspecialchars($task['description'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
-
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 Creado por: <?= htmlspecialchars($task['user_name'] ?? 'Anónimo', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 ⏱️ Inicio: <?= htmlspecialchars($task['created_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
-                            <small>
+                            <small class="block font-extrabold mt-1.5" style="color: rgba(24,36,43,0.68);">
                                 🏁 Fin: <?= htmlspecialchars($task['finished_at'] ?? '--:--', ENT_QUOTES, 'UTF-8') ?>
                             </small>
 
                             <span class="status-pill status-finished">
                                 FINISHED
                             </span>
+
+                            <div class="flex items-center justify-between gap-2.5 mt-4">
+                                <form method="POST" action="/task/delete" onsubmit="return confirm('¿Seguro que quieres borrar esta tarea?');">
+                                    <input type="hidden" name="id" value="<?= htmlspecialchars((string) ($task['id'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
+                                    <button type="submit"
+                                            class="border-0 rounded-full py-[11px] px-[14px] text-sm font-black cursor-pointer inline-flex items-center justify-center text-white transition-transform duration-150 hover:-translate-y-0.5"
+                                            style="background:#F76BA6; box-shadow: 0 6px 0 #D94D87;">
+                                        🗑 Borrar
+                                    </button>
+                                </form>
+
+                                <a href="/task/edit?id=<?= $taskId ?>" title="Editar tarea"
+                                   class="w-10 h-10 border-0 rounded-full text-xl leading-none inline-flex items-center justify-center no-underline cursor-pointer transition-transform duration-150 hover:-translate-y-0.5 shrink-0"
+                                   style="background:#E5E7EB; color:#18242B; box-shadow: 0 6px 0 #B8BDC7;">
+                                    ⋯
+                                </a>
+                            </div>
                         </article>
                     <?php endif; ?>
                 <?php endforeach; ?>
 
                 <?php if (!$hasFinished): ?>
-                    <p class="empty-state">No hay tareas terminadas.</p>
+                    <p class="m-0 font-extrabold" style="color: rgba(24,36,43,0.58);">No hay tareas terminadas.</p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
     </section>
+</div>
 </div>
