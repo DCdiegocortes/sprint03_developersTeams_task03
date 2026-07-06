@@ -127,17 +127,6 @@ Removes tasks permanently from storage.
 
 ---
 
-##  Design System
-
-The interface follows a custom design language based on:
-
-- Glassmorphism
-- Bubblegum Pink
-- Baby Blue
-- Open Sauce Typography
-- Responsive Layout
-- Modern UI Components
-
 ## Screenshots
 
 ### Home Page
