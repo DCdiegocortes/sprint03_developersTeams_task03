@@ -64,15 +64,15 @@ $inputBase = 'border-0 rounded-2xl py-[15px] px-[18px] text-base font-bold bg-[r
                 </option>
 
                 <option value="PENDING" <?= $currentStatus === 'PENDING' ? 'selected' : '' ?>>
-                    Filtrar por pendientes
+                    Pendientes
                 </option>
 
                 <option value="IN_PROGRESS" <?= $currentStatus === 'IN_PROGRESS' ? 'selected' : '' ?>>
-                    Filtrar por en ejecución
+                    En ejecución
                 </option>
 
                 <option value="FINISHED" <?= $currentStatus === 'FINISHED' ? 'selected' : '' ?>>
-                    Filtrar por terminadas
+                    Terminadas
                 </option>
             </select>
 
@@ -131,6 +131,12 @@ $inputBase = 'border-0 rounded-2xl py-[15px] px-[18px] text-base font-bold bg-[r
                                    style="background:#F76BA6; box-shadow: 0 6px 0 #D94D87;">
                                     ▶️ Play
                                 </a>
+
+                                <a href="/task/edit?id=<?= $taskId ?>" title="Editar tarea"
+                                   class="w-10 h-10 border-0 rounded-full text-xl leading-none inline-flex items-center justify-center no-underline cursor-pointer transition-transform duration-150 hover:-translate-y-0.5 shrink-0"
+                                   style="background:#E5E7EB; color:#18242B; box-shadow: 0 6px 0 #B8BDC7;">
+                                    ⋯
+                                </a>
                             </div>
                         </article>
                     <?php endif; ?>
@@ -181,6 +187,12 @@ $inputBase = 'border-0 rounded-2xl py-[15px] px-[18px] text-base font-bold bg-[r
                                    class="border-0 rounded-full py-[11px] px-[14px] text-sm font-black cursor-pointer no-underline inline-flex items-center justify-center text-white transition-transform duration-150 hover:-translate-y-0.5"
                                    style="background:#F76BA6; box-shadow: 0 6px 0 #D94D87;">
                                     ✅ Terminar
+                                </a>
+
+                                <a href="/task/edit?id=<?= $taskId ?>" title="Editar tarea"
+                                   class="w-10 h-10 border-0 rounded-full text-xl leading-none inline-flex items-center justify-center no-underline cursor-pointer transition-transform duration-150 hover:-translate-y-0.5 shrink-0"
+                                   style="background:#E5E7EB; color:#18242B; box-shadow: 0 6px 0 #B8BDC7;">
+                                    ⋯
                                 </a>
                             </div>
                         </article>
