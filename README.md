@@ -152,20 +152,25 @@ Ver todas/ Filtrado por Estado/ Búsqueda por palabra clave:
 ### Edit Task
 
 Edición rápida:
+
 <img width="688" height="634" alt="Cambio de estado (edicion rapida)" src="https://github.com/user-attachments/assets/81b456bc-0a6a-4d2b-86e2-27ed1e8242dc" />
 
 Edición en perfil de tarea:
+
 <img width="438" height="473" alt="Edicion profunda" src="https://github.com/user-attachments/assets/d60bca0a-cac2-4430-9198-d88de759ac00" />
 
 Mensaje de confirmación (y redirección al listado):
+
 <img width="677" height="773" alt="Mensaje de confirmacion de edicion" src="https://github.com/user-attachments/assets/31dda484-4253-453b-96bd-212de2bb1e6d" />
 
 ### Delete Task
 
 Borrado rapido:
+
 <img width="497" height="542" alt="Tarea borrada con edicion rapida" src="https://github.com/user-attachments/assets/c4202f77-800a-4218-9f14-23fa14c3349e" />
 
 Borrado en perfil de tarea:
+
 <img width="438" height="473" alt="Edicion profunda" src="https://github.com/user-attachments/assets/c0a81706-c619-4b3b-8d3a-ce727bf14ae1" />
 
 
