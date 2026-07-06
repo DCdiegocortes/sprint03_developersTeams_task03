@@ -38,9 +38,8 @@ A web application for task management developed using **PHP** and the **MVC (Mod
 
 ---
 
-##  Project Structure
-
-screenshots/project-structure.png
+### Project Structure
+![Project Structure](screenshots/project-structure.png)
 
 ---
 
@@ -153,5 +152,3 @@ The interface follows a custom design language based on:
 ### Quick Edit
 ![Quick Edit](screenshots/quick-edit.png)
 
-### Project Structure
-![Project Structure](screenshots/project-structure.png)
