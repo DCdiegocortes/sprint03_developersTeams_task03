@@ -139,26 +139,25 @@ The interface follows a custom design language based on:
 - Responsive Layout
 - Modern UI Components
 
----
-
-##  Screenshots
+## Screenshots
 
 ### Home Page
 
-_Add screenshot here._
+screenshots/home.png
 
 ### Create Task
 
-_Add screenshot here._
-
-### Task List
-
-_Add screenshot here._
+screenshots/create-task.png
 
 ### Edit Task
 
-_Add screenshot here._
+screenshots/edit-task.png
 
----
+### Quick Edit
 
+screenshots/quick-edit.png
+
+### Project Structure
+
+screenshots/project-structure.png
 
