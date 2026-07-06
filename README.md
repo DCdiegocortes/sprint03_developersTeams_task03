@@ -56,7 +56,7 @@ A web application for task management developed using **PHP** and the **MVC (Mod
 
 ### 1. Clone the repository
 
-git clone https://github.com/your-username/your-repository.git
+(https://github.com/DCdiegocortes/sprint03_developersTeams_task03.git)
 
 ### 2. Navigate to the project directory
 
